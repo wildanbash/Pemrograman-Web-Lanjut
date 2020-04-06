@@ -4,6 +4,6 @@
 
 ### Struktur Repo
 
-- Laporan: [PDF](/Laporan/)
+- Laporan: [PDF](/laporan/)
 - CodeIgniter: Code materi CodeIgniter
 - Laravel: Code materi Laravel
