@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,24 +13,36 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/', 'MahasiswaController@index');
 
+Route::get('/', function(){
+    return view('welcome');
+});
 
+Route::middleware('auth')->group(function(){
+    
+    Route::get('/mahasiswa', 'MahasiswaController@index');
+    
+    Route::get('/mahasiswa/tambah', 'MahasiswaController@tambah');
+    
+    Route::post('/mahasiswa/simpan', 'MahasiswaController@simpan');
+    
+    Route::get('/mahasiswa/detail/{id}', 'MahasiswaController@detail');
+    
+    Route::get('/mahasiswa/edit/{id}', 'MahasiswaController@edit');
+    
+    Route::post('/mahasiswa/update', 'MahasiswaController@update');
+    
+    Route::get('/mahasiswa/hapus/{id}', 'MahasiswaController@hapus');    
 
-Route::get('/mahasiswa', 'MahasiswaController@index');
+});
 
-Route::get('/', 'MahasiswaController@index');
+Auth::routes();
 
-Route::get('/mahasiswa/tambah', 'MahasiswaController@tambah');
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/mahasiswa/simpan', 'MahasiswaController@simpan');
+Route::resource('/admin/users', 'Admin\UsersController',['except' => ['show', 'create', 'store']]);    
 
-Route::get('/mahasiswa/detail/{id}', 'MahasiswaController@detail');
-
-Route::get('/mahasiswa/edit/{id}', 'MahasiswaController@edit');
-
-Route::post('/mahasiswa/update', 'MahasiswaController@update');
-
-Route::get('/mahasiswa/hapus/{id}', 'MahasiswaController@hapus');
 
 
 
